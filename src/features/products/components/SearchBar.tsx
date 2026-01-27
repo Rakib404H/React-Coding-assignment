@@ -71,33 +71,43 @@ export function SearchBar() {
     >
       <div className="flex-1">
         <label className="section-label">Search</label>
-        <input
-          value={value}
-          onChange={(event) => {
-            setValue(event.target.value)
-            setIsUserTyping(true)
-          }}
-          placeholder="Search products by title"
-          className="input-field"
-        />
+        <div className="relative">
+          <input
+            value={value}
+            onChange={(event) => {
+              setValue(event.target.value)
+              setIsUserTyping(true)
+            }}
+            placeholder="Search products by title"
+            className="input-field pr-12"
+          />
+          {!isClearDisabled && (
+            <button
+              type="button"
+              onClick={onClear}
+              className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-2 text-ink/50 transition hover:bg-ink/5 hover:text-ember"
+              aria-label="Clear search"
+            >
+              <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
+                <path
+                  d="M6 6l12 12M18 6L6 18"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </button>
+          )}
+        </div>
       </div>
-      <div className="flex w-full flex-col gap-2 md:w-auto md:flex-row md:items-end">
-        <button
-          type="submit"
-          className="btn-primary w-full md:w-auto md:self-end"
-          disabled={isSubmitDisabled}
-        >
-          Search
-        </button>
-        <button
-          type="button"
-          className="btn-secondary w-full md:w-auto md:self-end"
-          onClick={onClear}
-          disabled={isClearDisabled}
-        >
-          Clear
-        </button>
-      </div>
+      <button
+        type="submit"
+        className="btn-primary w-full md:w-auto md:self-end"
+        disabled={isSubmitDisabled}
+      >
+        Search
+      </button>
       <p className="md:col-span-2 text-xs text-ink/50">
         Results update as you type, and the URL stays shareable.
       </p>
