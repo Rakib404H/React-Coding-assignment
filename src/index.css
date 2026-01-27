@@ -22,6 +22,40 @@ body {
   min-height: 100vh;
 }
 
+@layer components {
+  .glass-panel {
+    @apply rounded-3xl border border-ink/10 bg-white/80 shadow-card backdrop-blur;
+  }
+
+  .muted-panel {
+    @apply rounded-3xl border border-ink/10 bg-white/70;
+  }
+
+  .section-label {
+    @apply text-xs uppercase tracking-[0.3em] text-sea;
+  }
+
+  .input-field {
+    @apply mt-2 w-full rounded-2xl border border-ink/10 bg-white/70 px-4 py-3 text-sm text-ink/80 outline-none transition focus:border-ink focus:ring-2 focus:ring-ember/30;
+  }
+
+  .select-field {
+    @apply mt-2 w-full rounded-2xl border border-ink/10 bg-white/70 px-4 py-3 text-sm text-ink/80 outline-none transition focus:border-ink focus:ring-2 focus:ring-ember/30;
+  }
+
+  .btn-primary {
+    @apply rounded-full bg-ember px-6 py-3 text-sm font-semibold text-white shadow-glow transition hover:-translate-y-0.5 hover:shadow-card;
+  }
+
+  .btn-secondary {
+    @apply rounded-full border border-ink/20 px-4 py-2 text-sm font-semibold text-ink/70 transition hover:border-ink hover:text-ink;
+  }
+
+  .pill {
+    @apply rounded-full border border-ink/10 bg-white/70 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-ink/60;
+  }
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;

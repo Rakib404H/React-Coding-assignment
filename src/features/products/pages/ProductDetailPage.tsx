@@ -22,7 +22,7 @@ export function ProductDetailPage() {
 
   return (
     <section className="grid gap-8 lg:grid-cols-[1.1fr_1fr]">
-      <div className="motion-card rounded-3xl border border-ink/10 bg-white/80 p-6 shadow-card">
+      <div className="glass-panel motion-card p-6">
         <img
           src={data.thumbnail}
           alt={data.title}
@@ -34,31 +34,33 @@ export function ProductDetailPage() {
           ))}
         </div>
       </div>
-      <div className="motion-card rounded-3xl border border-ink/10 bg-white/80 p-6 shadow-card">
-        <p className="text-xs uppercase tracking-[0.3em] text-sea">Product detail</p>
+      <div className="glass-panel motion-card p-6">
+        <span className="pill">Product detail</span>
         <h2 className="mt-2 text-2xl font-semibold">{data.title}</h2>
         <p className="mt-3 text-sm text-ink/70">{data.description}</p>
         <div className="mt-6 grid gap-4 text-sm">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between rounded-2xl border border-ink/10 bg-white/70 px-4 py-3">
             <span className="text-ink/60">Price</span>
             <span className="text-lg font-semibold">{formatPrice(data.price, currency)}</span>
           </div>
-          <div className="flex items-center justify-between">
-            <span className="text-ink/60">Category</span>
-            <span className="font-medium">{data.category}</span>
+          <div className="grid gap-3 md:grid-cols-2">
+            <div className="flex items-center justify-between rounded-2xl border border-ink/10 bg-white/70 px-4 py-3">
+              <span className="text-ink/60">Category</span>
+              <span className="font-medium">{data.category}</span>
+            </div>
+            <div className="flex items-center justify-between rounded-2xl border border-ink/10 bg-white/70 px-4 py-3">
+              <span className="text-ink/60">Rating</span>
+              <span className="font-medium">{data.rating.toFixed(1)} / 5</span>
+            </div>
           </div>
-          <div className="flex items-center justify-between">
-            <span className="text-ink/60">Rating</span>
-            <span className="font-medium">{data.rating.toFixed(1)} / 5</span>
-          </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between rounded-2xl border border-ink/10 bg-white/70 px-4 py-3">
             <span className="text-ink/60">Stock</span>
             <span className="font-medium">{data.stock}</span>
           </div>
         </div>
         <Link
           to="/products"
-          className="mt-8 inline-flex rounded-full border border-ink/20 px-5 py-2 text-sm font-semibold text-ink/70 hover:border-ink"
+          className="btn-secondary mt-8 inline-flex"
         >
           Back to products
         </Link>

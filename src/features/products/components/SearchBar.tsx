@@ -41,25 +41,23 @@ export function SearchBar() {
   return (
     <form
       onSubmit={onSubmit}
-      className="motion-card flex flex-col gap-3 rounded-3xl border border-ink/10 bg-white/80 p-4 shadow-card md:flex-row md:items-end"
+      className="glass-panel motion-card grid gap-4 p-5 md:grid-cols-[1fr_auto] md:items-end"
     >
       <div className="flex-1">
-        <label className="text-xs uppercase tracking-[0.3em] text-sea">Search</label>
+        <label className="section-label">Search</label>
         <input
           value={value}
           onChange={(event) => setValue(event.target.value)}
           placeholder="Search products by title"
-          className="mt-2 w-full rounded-2xl border border-ink/10 bg-white/70 px-4 py-3 text-sm focus:border-ink focus:outline-none"
+          className="input-field"
         />
+        <p className="mt-2 text-xs text-ink/50">
+          Results update as you type, and the URL stays shareable.
+        </p>
       </div>
-      <div className="md:pb-[2px]">
-        <button
-          type="submit"
-          className="rounded-full bg-ember px-6 py-3 text-sm font-semibold text-white shadow-glow"
-        >
-          Search
-        </button>
-      </div>
+      <button type="submit" className="btn-primary w-full md:w-auto">
+        Search
+      </button>
     </form>
   )
 }

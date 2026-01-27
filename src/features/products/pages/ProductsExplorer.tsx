@@ -68,7 +68,7 @@ export function ProductsExplorer({ mode }: Props) {
       <FilterBar categories={categoriesData ?? []} />
 
       {mode === 'search' && !query && (
-        <div className="motion-card rounded-3xl border border-ink/10 bg-white/80 p-8 shadow-card">
+        <div className="glass-panel motion-card p-8">
           <p className="text-sm text-ink/70">
             Enter a search query to explore matching products. The URL will update so you can
             bookmark or share the results.
@@ -79,20 +79,20 @@ export function ProductsExplorer({ mode }: Props) {
       {isLoading ? (
         <LoadingSkeleton rows={8} />
       ) : isError ? (
-        <div className="motion-card rounded-3xl border border-ink/10 bg-white/80 p-8 shadow-card">
+        <div className="glass-panel motion-card p-8">
           <p className="text-sm text-ink/70">{(error as Error).message}</p>
         </div>
       ) : queryEnabled && sorted.length === 0 ? (
-        <div className="motion-card rounded-3xl border border-ink/10 bg-white/80 p-8 shadow-card">
+        <div className="glass-panel motion-card p-8">
           <p className="text-sm text-ink/70">No products match the current filters.</p>
         </div>
       ) : (
         <>
-          <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-ink/60">
-            <span>
+          <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-ink/60">
+            <span className="pill">
               Showing {sorted.length} items{total ? ` of ${total}` : ''}
             </span>
-            <span className="font-mono text-xs">Loaded in batches of {PAGE_SIZE}</span>
+            <span className="font-mono text-xs text-ink/50">Loaded in batches of {PAGE_SIZE}</span>
           </div>
           <ProductsTable products={sorted} />
         </>

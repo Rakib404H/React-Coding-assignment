@@ -7,7 +7,7 @@ export function ProductsTable({ products }: { products: Product[] }) {
   const { currency } = useCurrency()
 
   return (
-    <div className="motion-card overflow-x-auto rounded-3xl border border-ink/10 bg-white/80 shadow-card">
+    <div className="glass-panel motion-card overflow-x-auto">
       <table className="w-full min-w-[700px] text-left text-sm">
         <thead className="bg-ink text-mist">
           <tr>
@@ -18,11 +18,11 @@ export function ProductsTable({ products }: { products: Product[] }) {
             <th className="px-6 py-4 font-semibold">Stock</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="bg-white/60">
           {products.map((product, index) => (
             <tr
               key={product.id}
-              className="table-row border-b border-ink/10 last:border-none"
+              className="table-row border-b border-ink/10 last:border-none odd:bg-white/70"
               style={{ animation: 'fade-up 0.45s ease both', animationDelay: `${index * 30}ms` }}
             >
               <td className="px-6 py-4">
@@ -37,7 +37,7 @@ export function ProductsTable({ products }: { products: Product[] }) {
                   />
                   <div>
                     <p>{product.title}</p>
-                    <p className="max-w-[240px] truncate text-xs text-ink/60">{product.description}</p>
+                    <p className="max-w-[260px] truncate text-xs text-ink/60">{product.description}</p>
                   </div>
                 </Link>
               </td>

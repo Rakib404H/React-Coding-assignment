@@ -19,7 +19,7 @@ export class ErrorBoundary extends React.Component<
   render() {
     if (this.state.hasError) {
       return (
-        <div className="motion-card rounded-3xl border border-ink/10 bg-white/80 p-8 shadow-card">
+        <div className="glass-panel motion-card p-8">
           <h2 className="text-xl font-semibold text-ink">Something went wrong.</h2>
           <p className="mt-2 text-sm text-ink/70">
             Try refreshing the page. If the issue persists, the app may need attention.
