@@ -22,6 +22,15 @@ export function useUrlSync(mode: Mode) {
   const [searchParams, setSearchParams] = useSearchParams()
   const { query, category, sort, page, setFromUrl, resetAll } = useFiltersStore()
 
+  const parseFromUrl = () => {
+    return {
+      query: mode === 'search' ? searchParams.get('q') ?? '' : '',
+      category: searchParams.get('category') ?? '',
+      sort: parseSort(searchParams.get('sort')),
+      page: parsePage(searchParams.get('page'))
+    }
+  }
+
   useEffect(() => {
     const hasParams = searchParams.toString().length > 0
     if (mode === 'list' && !hasParams) {
@@ -29,20 +38,20 @@ export function useUrlSync(mode: Mode) {
       return
     }
 
-    const nextQuery = mode === 'search' ? searchParams.get('q') ?? '' : ''
-    const nextCategory = searchParams.get('category') ?? ''
-    const nextSort = parseSort(searchParams.get('sort'))
-    const nextPage = parsePage(searchParams.get('page'))
-
-    setFromUrl({
-      query: nextQuery,
-      category: nextCategory,
-      sort: nextSort,
-      page: nextPage
-    })
+    const parsed = parseFromUrl()
+    setFromUrl(parsed)
   }, [location.search, mode, resetAll, searchParams, setFromUrl])
 
   useEffect(() => {
+    const parsed = parseFromUrl()
+    const storeMatchesUrl =
+      query === parsed.query &&
+      category === parsed.category &&
+      sort === parsed.sort &&
+      page === parsed.page
+
+    if (!storeMatchesUrl) return
+
     const nextParams = new URLSearchParams()
     if (mode === 'search' && query.trim().length > 0) {
       nextParams.set('q', query.trim())
