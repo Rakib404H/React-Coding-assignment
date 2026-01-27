@@ -6,7 +6,11 @@ const sortOptions: { value: SortOrder; label: string }[] = [
   { value: 'price_desc', label: 'Price: high to low' }
 ]
 
-export function FilterBar({ categories }: { categories: string[] }) {
+export function FilterBar({
+  categories
+}: {
+  categories: { slug: string; name: string }[]
+}) {
   const { category, sort, setCategory, setSort, resetPage } = useFiltersStore()
 
   return (
@@ -23,8 +27,8 @@ export function FilterBar({ categories }: { categories: string[] }) {
         >
           <option value="">All categories</option>
           {categories.map((item) => (
-            <option key={item} value={item}>
-              {item}
+            <option key={item.slug} value={item.slug}>
+              {item.name}
             </option>
           ))}
         </select>

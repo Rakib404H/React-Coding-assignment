@@ -23,7 +23,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen px-4 py-6 md:px-10">
-      <header className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <header className="page-enter flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-xs uppercase tracking-[0.3em] text-sea">JustGo</p>
           <h1 className="text-2xl font-semibold text-ink md:text-3xl">{title}</h1>
@@ -50,7 +50,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           ))}
         </nav>
       </header>
-      <main className="mt-8">{children}</main>
+      <main className="page-stagger mt-8">{children}</main>
     </div>
   )
 }

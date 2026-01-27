@@ -23,6 +23,12 @@ export type ProductsResponse = {
   limit: number
 }
 
+export type Category = {
+  slug: string
+  name: string
+  url: string
+}
+
 async function fetchJson<T>(url: string): Promise<T> {
   const response = await fetch(url)
   if (!response.ok) {
@@ -85,7 +91,14 @@ export function useProduct(id: string | undefined) {
 export function useCategories() {
   return useQuery({
     queryKey: ['categories'],
-    queryFn: () => fetchJson<string[]>(`${API_BASE}/products/categories`)
+    queryFn: async () => {
+      const data = await fetchJson<Array<string | Category>>(`${API_BASE}/products/categories`)
+      return data.map((item) =>
+        typeof item === 'string'
+          ? { slug: item, name: item, url: `${API_BASE}/products/category/${item}` }
+          : item
+      )
+    }
   })
 }
 

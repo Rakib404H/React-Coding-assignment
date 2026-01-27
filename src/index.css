@@ -43,6 +43,33 @@ body {
   box-shadow: 0 18px 40px -30px rgba(12, 15, 20, 0.45);
 }
 
+.page-enter {
+  animation: fade-up 0.7s ease both;
+}
+
+.page-stagger > * {
+  animation: fade-up 0.6s ease both;
+}
+
+.page-stagger > *:nth-child(1) {
+  animation-delay: 0ms;
+}
+.page-stagger > *:nth-child(2) {
+  animation-delay: 120ms;
+}
+.page-stagger > *:nth-child(3) {
+  animation-delay: 240ms;
+}
+.page-stagger > *:nth-child(4) {
+  animation-delay: 360ms;
+}
+.page-stagger > *:nth-child(5) {
+  animation-delay: 480ms;
+}
+.page-stagger > *:nth-child(6) {
+  animation-delay: 600ms;
+}
+
 .table-row {
   transition: background-color 150ms ease, transform 150ms ease;
 }
