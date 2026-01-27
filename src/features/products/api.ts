@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery, type InfiniteData } from '@tanstack/react-query'
 
 const API_BASE = 'https://dummyjson.com'
 const PAGE_SIZE = 20
@@ -69,7 +69,7 @@ export function useProductsInfinite({
   return useInfiniteQuery<
     ProductsResponse,
     Error,
-    ProductsResponse,
+    InfiniteData<ProductsResponse>,
     [string, { query: string; category: string }],
     number
   >({
