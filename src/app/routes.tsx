@@ -7,6 +7,7 @@ import { NotFoundPage } from '@/shared/NotFoundPage'
 
 export const routes: RouteObject[] = [
   { path: '/', element: <ProductsExplorerRoute /> },
+  { path: '/jg-coding-task/*', element: <ProductsExplorerRoute /> },
   { path: '/products/*', element: <ProductsExplorerRoute /> },
   { path: '/products/:id(\\d+)', element: <ProductDetailPage /> },
   { path: '/products/categories', element: <CategoriesPage /> },
