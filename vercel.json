@@ -1,3 +1,6 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "rewrites": [
+    { "source": "/jg-coding-task/assets/(.*)", "destination": "/assets/$1" },
+    { "source": "/jg-coding-task/(.*)", "destination": "/index.html" }
+  ]
 }
