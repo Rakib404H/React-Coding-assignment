@@ -18,7 +18,7 @@ type Props = {
 export function ProductsExplorer({ mode }: Props) {
   useUrlSync(mode)
   const { query, category, sort, page, setPage } = useFiltersStore()
-  const { data: categoriesData } = useCategories()
+  const { data: categoriesData, isLoading: isCategoriesLoading } = useCategories()
 
   const effectiveQuery = mode === 'search' ? query : ''
   const queryEnabled = mode === 'list' || effectiveQuery.trim().length > 0
@@ -65,7 +65,7 @@ export function ProductsExplorer({ mode }: Props) {
   return (
     <section className="space-y-6">
       <SearchBar />
-      <FilterBar categories={categoriesData ?? []} />
+      <FilterBar categories={categoriesData ?? []} isLoading={isCategoriesLoading} />
 
       {mode === 'search' && !query && (
         <div className="glass-panel motion-card p-8">
@@ -77,7 +77,7 @@ export function ProductsExplorer({ mode }: Props) {
       )}
 
       {isLoading ? (
-        <LoadingSkeleton rows={8} />
+        <LoadingSkeleton rows={8} className="glass-panel p-6" />
       ) : isError ? (
         <div className="glass-panel motion-card p-8">
           <p className="text-sm text-ink/70">{(error as Error).message}</p>

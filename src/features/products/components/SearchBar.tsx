@@ -8,6 +8,7 @@ export function SearchBar() {
   const { query, category, sort, setQuery, resetPage } = useFiltersStore()
   const [value, setValue] = useState(query)
   const [isUserTyping, setIsUserTyping] = useState(false)
+  const isSubmitDisabled = value.trim().length === 0
 
   useEffect(() => {
     setValue(query)
@@ -71,7 +72,11 @@ export function SearchBar() {
           className="input-field"
         />
       </div>
-      <button type="submit" className="btn-primary w-full md:w-auto md:self-end">
+      <button
+        type="submit"
+        className="btn-primary w-full md:w-auto md:self-end"
+        disabled={isSubmitDisabled}
+      >
         Search
       </button>
       <p className="md:col-span-2 text-xs text-ink/50">

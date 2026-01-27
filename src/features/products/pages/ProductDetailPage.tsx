@@ -9,7 +9,7 @@ export function ProductDetailPage() {
   const { currency } = useCurrency()
 
   if (isLoading) {
-    return <div className="h-64 animate-pulse rounded-3xl bg-ink/5" />
+    return <div className="skeleton h-64 rounded-3xl" />
   }
 
   if (isError || !data) {

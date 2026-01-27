@@ -1,10 +1,16 @@
-export function LoadingSkeleton({ rows = 6 }: { rows?: number }) {
+export function LoadingSkeleton({
+  rows = 6,
+  className = ''
+}: {
+  rows?: number
+  className?: string
+}) {
   return (
-    <div className="space-y-3">
+    <div className={`space-y-3 ${className}`}>
       {Array.from({ length: rows }).map((_, index) => (
         <div
           key={index}
-          className="h-12 w-full animate-pulse rounded-2xl bg-ink/5"
+          className="skeleton h-12 w-full rounded-2xl"
         />
       ))}
     </div>

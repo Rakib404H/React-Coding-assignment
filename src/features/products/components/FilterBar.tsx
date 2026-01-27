@@ -7,11 +7,15 @@ const sortOptions: { value: SortOrder; label: string }[] = [
 ]
 
 export function FilterBar({
-  categories
+  categories,
+  isLoading = false
 }: {
   categories: { slug: string; name: string }[]
+  isLoading?: boolean
 }) {
   const { category, sort, setCategory, setSort, resetPage } = useFiltersStore()
+  const hasActiveFilters = category.length > 0 || sort !== 'none'
+  const isCategoryDisabled = isLoading && categories.length === 0
 
   return (
     <div className="glass-panel motion-card grid gap-4 p-5 md:grid-cols-[1.3fr_1fr_auto] md:items-end">
@@ -24,8 +28,11 @@ export function FilterBar({
             resetPage()
           }}
           className="select-field"
+          disabled={isCategoryDisabled}
         >
-          <option value="">All categories</option>
+          <option value="">
+            {isCategoryDisabled ? 'Loading categories...' : 'All categories'}
+          </option>
           {categories.map((item) => (
             <option key={item.slug} value={item.slug}>
               {item.name}
@@ -57,7 +64,8 @@ export function FilterBar({
           setSort('none')
           resetPage()
         }}
-        className="btn-secondary w-full md:w-auto md:self-center"
+        className="btn-secondary w-full md:h-[44px] md:w-auto md:self-end"
+        disabled={!hasActiveFilters}
       >
         Clear filters
       </button>

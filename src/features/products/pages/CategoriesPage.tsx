@@ -8,7 +8,7 @@ export function CategoriesPage() {
     return (
       <div className="grid gap-4 md:grid-cols-2">
         {Array.from({ length: 6 }).map((_, index) => (
-          <div key={index} className="h-20 animate-pulse rounded-3xl bg-ink/5" />
+          <div key={index} className="skeleton h-20 rounded-3xl" />
         ))}
       </div>
     )
@@ -22,9 +22,17 @@ export function CategoriesPage() {
     )
   }
 
+  if (!data || data.length === 0) {
+    return (
+      <div className="glass-panel motion-card p-8">
+        <p className="text-sm text-ink/70">No categories available right now.</p>
+      </div>
+    )
+  }
+
   return (
     <div className="grid gap-5 md:grid-cols-2">
-      {(data ?? []).map((category) => (
+      {data.map((category) => (
         <Link
           key={category.slug}
           to={`/products?category=${encodeURIComponent(category.slug)}`}
