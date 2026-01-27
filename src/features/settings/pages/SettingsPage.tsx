@@ -1,7 +1,11 @@
 import { useCurrency } from '../context'
 import type { Currency } from '@/shared/utils'
 
-const options: Currency[] = ['USD', 'GBP', 'EUR']
+const options: { value: Currency; label: string }[] = [
+  { value: 'USD', label: 'USD' },
+  { value: 'GBP', label: 'Pound' },
+  { value: 'EUR', label: 'Euro' }
+]
 
 export function SettingsPage() {
   const { currency, setCurrency } = useCurrency()
@@ -17,17 +21,17 @@ export function SettingsPage() {
       <div className="mt-6 space-y-3">
         {options.map((option) => (
           <label
-            key={option}
+            key={option.value}
             className="flex items-center gap-3 rounded-2xl border border-ink/10 bg-white/70 px-4 py-3 text-sm transition hover:border-ink/30"
           >
             <input
               type="radio"
               name="currency"
-              value={option}
-              checked={currency === option}
-              onChange={() => setCurrency(option)}
+              value={option.value}
+              checked={currency === option.value}
+              onChange={() => setCurrency(option.value)}
             />
-            <span className="font-medium">{option}</span>
+            <span className="font-medium">{option.label}</span>
           </label>
         ))}
       </div>

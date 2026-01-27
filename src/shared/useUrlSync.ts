@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import { useFiltersStore, type SortOrder } from '@/store/useFiltersStore'
 
@@ -21,6 +21,7 @@ export function useUrlSync(mode: Mode) {
   const location = useLocation()
   const [searchParams, setSearchParams] = useSearchParams()
   const { query, category, sort, page, setFromUrl, resetAll } = useFiltersStore()
+  const applyingUrlRef = useRef(false)
 
   const parseFromUrl = () => {
     return {
@@ -39,18 +40,15 @@ export function useUrlSync(mode: Mode) {
     }
 
     const parsed = parseFromUrl()
+    applyingUrlRef.current = true
     setFromUrl(parsed)
   }, [location.search, mode, resetAll, searchParams, setFromUrl])
 
   useEffect(() => {
-    const parsed = parseFromUrl()
-    const storeMatchesUrl =
-      query === parsed.query &&
-      category === parsed.category &&
-      sort === parsed.sort &&
-      page === parsed.page
-
-    if (!storeMatchesUrl) return
+    if (applyingUrlRef.current) {
+      applyingUrlRef.current = false
+      return
+    }
 
     const nextParams = new URLSearchParams()
     if (mode === 'search' && query.trim().length > 0) {
