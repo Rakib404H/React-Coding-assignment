@@ -66,13 +66,20 @@ export function useProductsInfinite({
   category?: string
   enabled?: boolean
 }) {
-  return useInfiniteQuery({
+  return useInfiniteQuery<
+    ProductsResponse,
+    Error,
+    ProductsResponse,
+    [string, { query: string; category: string }],
+    number
+  >({
     queryKey: ['products', { query: query ?? '', category: category ?? '' }],
     queryFn: ({ pageParam = 0 }) =>
       fetchJson<ProductsResponse>(
         buildProductsUrl({ query, category, limit: PAGE_SIZE, skip: pageParam })
       ),
     enabled,
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       const nextSkip = lastPage.skip + lastPage.limit
       return nextSkip < lastPage.total ? nextSkip : undefined
