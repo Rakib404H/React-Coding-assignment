@@ -20,9 +20,15 @@ type Mode = 'list' | 'search'
 export function useUrlSync(mode: Mode) {
   const location = useLocation()
   const [searchParams, setSearchParams] = useSearchParams()
-  const { query, category, sort, page, setFromUrl } = useFiltersStore()
+  const { query, category, sort, page, setFromUrl, resetAll } = useFiltersStore()
 
   useEffect(() => {
+    const hasParams = searchParams.toString().length > 0
+    if (mode === 'list' && !hasParams) {
+      resetAll()
+      return
+    }
+
     const nextQuery = mode === 'search' ? searchParams.get('q') ?? '' : ''
     const nextCategory = searchParams.get('category') ?? ''
     const nextSort = parseSort(searchParams.get('sort'))
@@ -34,7 +40,7 @@ export function useUrlSync(mode: Mode) {
       sort: nextSort,
       page: nextPage
     })
-  }, [location.search, mode, searchParams, setFromUrl])
+  }, [location.search, mode, resetAll, searchParams, setFromUrl])
 
   useEffect(() => {
     const nextParams = new URLSearchParams()

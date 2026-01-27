@@ -12,6 +12,7 @@ export type FiltersState = {
   setSort: (sort: SortOrder) => void
   setPage: (page: number) => void
   resetPage: () => void
+  resetAll: () => void
   setFromUrl: (params: Partial<Pick<FiltersState, 'query' | 'category' | 'sort' | 'page'>>) => void
 }
 
@@ -25,6 +26,7 @@ export const useFiltersStore = create<FiltersState>((set) => ({
   setSort: (sort) => set({ sort }),
   setPage: (page) => set({ page }),
   resetPage: () => set({ page: 1 }),
+  resetAll: () => set({ query: '', category: '', sort: 'none', page: 1 }),
   setFromUrl: (params) =>
     set((state) => ({
       query: params.query ?? state.query,
