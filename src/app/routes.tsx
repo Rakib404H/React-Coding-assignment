@@ -8,7 +8,7 @@ import { NotFoundPage } from '@/shared/NotFoundPage'
 export const routes: RouteObject[] = [
   { path: '/', element: <ProductsExplorerRoute /> },
   { path: '/products/*', element: <ProductsExplorerRoute /> },
-  { path: '/products/:id', element: <ProductDetailPage /> },
+  { path: '/products/:id(\\d+)', element: <ProductDetailPage /> },
   { path: '/products/categories', element: <CategoriesPage /> },
   { path: '/settings', element: <SettingsPage /> },
   { path: '*', element: <NotFoundPage /> }
