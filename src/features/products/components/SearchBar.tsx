@@ -9,6 +9,7 @@ export function SearchBar() {
   const [value, setValue] = useState(query)
   const [isUserTyping, setIsUserTyping] = useState(false)
   const isSubmitDisabled = value.trim().length === 0
+  const isClearDisabled = value.trim().length === 0 && query.trim().length === 0
 
   useEffect(() => {
     setValue(query)
@@ -55,6 +56,14 @@ export function SearchBar() {
     setIsUserTyping(false)
   }
 
+  const onClear = () => {
+    setValue('')
+    setQuery('')
+    resetPage()
+    navigate(buildTarget(''), { replace: true })
+    setIsUserTyping(false)
+  }
+
   return (
     <form
       onSubmit={onSubmit}
@@ -72,13 +81,23 @@ export function SearchBar() {
           className="input-field"
         />
       </div>
-      <button
-        type="submit"
-        className="btn-primary w-full md:w-auto md:self-end"
-        disabled={isSubmitDisabled}
-      >
-        Search
-      </button>
+      <div className="flex w-full flex-col gap-2 md:w-auto md:flex-row md:items-end">
+        <button
+          type="submit"
+          className="btn-primary w-full md:w-auto md:self-end"
+          disabled={isSubmitDisabled}
+        >
+          Search
+        </button>
+        <button
+          type="button"
+          className="btn-secondary w-full md:w-auto md:self-end"
+          onClick={onClear}
+          disabled={isClearDisabled}
+        >
+          Clear
+        </button>
+      </div>
       <p className="md:col-span-2 text-xs text-ink/50">
         Results update as you type, and the URL stays shareable.
       </p>
