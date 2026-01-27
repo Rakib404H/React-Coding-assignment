@@ -3,8 +3,9 @@ import { useProduct } from '../api'
 import { useCurrency } from '@/features/settings/context'
 import { formatPrice } from '@/shared/utils'
 
-export function ProductDetailPage() {
-  const { id } = useParams()
+export function ProductDetailPage({ productId }: { productId?: string } = {}) {
+  const params = useParams()
+  const id = productId ?? params.id
   const { data, isLoading, isError } = useProduct(id)
   const { currency } = useCurrency()
 

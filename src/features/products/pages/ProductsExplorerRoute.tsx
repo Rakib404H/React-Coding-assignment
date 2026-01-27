@@ -18,7 +18,7 @@ export function ProductsExplorerRoute() {
   if (detailMatch) {
     const id = detailMatch.params.id ?? ''
     if (/^\d+$/.test(id)) {
-      return <ProductDetailPage />
+      return <ProductDetailPage productId={id} />
     }
   }
 
