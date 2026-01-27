@@ -1,36 +1,106 @@
 # Product Explorer Dashboard
 
-Frontend engineer take-home for JustGo. Built with React + TypeScript, Vite, React Router, React Query, Zustand, and Tailwind CSS.
+A polished React + TypeScript product explorer built as practice for the JustGo frontend take‑home. It features deep‑linkable search, infinite scrolling, category filtering, currency preferences, and a responsive, table‑driven UI.
 
-## Setup
+## Context
+
+- This assignment was given to a friend of mine; I completed this as a **practice exercise**.
+- I used AI assistance to complete this project.
+
+## Highlights
+
+- Deep‑linkable search, filters, sort, and pagination via URL
+- Infinite scroll (20 items per load)
+- Table‑based product list (no 3rd‑party table library)
+- Global currency preference using React Context
+- Error Boundary + skeleton loading states
+- Responsive layout (desktop + mobile)
+
+## Tech Stack
+
+- React + TypeScript
+- Vite
+- React Router
+- React Query (server state)
+- Zustand (UI state)
+- Tailwind CSS
+
+## Getting Started
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Notes on architecture
+### Build & Preview
 
-- Server state lives in React Query; UI state (search, sort, category, pagination) lives in Zustand and is mirrored into the URL.
-- The `/products/search` route is fully deep-linkable: query, filters, sort, and page are encoded in the URL.
-- Infinite scrolling loads 20 items at a time and updates the `page` URL param so you can revisit the same scroll depth.
+```bash
+npm run build
+npm run preview
+```
 
-## README questions
+## Routes
 
-1. What trade-offs did you consciously make due to time constraints?
-   - Currency conversion uses fixed, hard-coded rates instead of a live FX service.
-   - When both search query and category are selected, category filtering is applied client-side to the search results.
-   - I focused on a clean UX and clear state boundaries instead of implementing additional features like caching persistence.
+- `/products` — Product list
+- `/products/:id` — Product detail
+- `/products/categories` — Category grid
+- `/products/search?q=` — Search results (shareable)
+- `/settings` — Currency settings
 
-2. If this app needed to scale (more data, more features), what would you refactor first?
-   - Add normalized caching or a server-driven search endpoint that supports combined filters to reduce client-side filtering.
-   - Introduce route-based data loaders or prefetching to improve perceived speed on deep links.
-   - Extract shared UI primitives (table, filters, cards) into a dedicated design system layer.
+## URL Parameters
 
-3. Did you use AI tools? If yes, which parts and how did you verify correctness?
-   - I used AI assistance for planning and scaffolding. I verified correctness by cross-checking API endpoints with the DummyJSON documentation and by reasoning through URL state syncing, pagination, and UI flows.
+The URL is the source of truth for search, filter, sort, and pagination state.
+
+Example:
+
+```
+/products/search?q=phone&category=smartphones&sort=price_desc&page=3
+```
+
+## Data Source
+
+All product data comes from the public API: https://dummyjson.com/
+
+## Requirements Coverage
+
+- Product list page ✅
+- Product detail page ✅
+- Search by title ✅
+- Sort by unit price ✅
+- Filter by category ✅
+- URL‑based deep linking ✅
+- Infinite scroll (20 items) ✅
+- Table rendering ✅
+- Skeleton loaders ✅
+- Currency settings via Context ✅
+- Error Boundary ✅
+- Responsive layout ✅
+
+## README Questions
+
+1) What trade‑offs did you consciously make due to time constraints?
+- Currency conversion uses fixed rates instead of live FX data.
+- Category + search combination is filtered client‑side due to API limitations.
+- I focused on UX polish and clean state boundaries over test coverage.
+
+2) If this app needed to scale (more data, more features), what would you refactor first?
+- Move search + filters to a backend query layer to avoid client‑side filtering.
+- Add prefetching and caching strategies for common navigation flows.
+- Extract UI primitives into a reusable design system.
+
+3) Did you use AI tools? If yes, which parts and how did you verify correctness?
+- Yes. I used AI assistance for scaffolding, UI refinement, and debugging. I verified correctness by validating API behavior, ensuring URL state sync, and manually testing all key flows.
 
 ## Assumptions
 
 - DummyJSON API is available and returns the documented schema.
-- Prices are displayed in selected currency using fixed conversion rates for demonstration.
+- Currency conversion rates are illustrative, not real‑time.
+
+## Deployment Notes
+
+- Vercel: uses `vercel.json` for SPA rewrites
+- Netlify: uses `public/_redirects` for SPA routing
+
+---
+
+Repository: https://github.com/Rakib404H/React-Coding-assignment
