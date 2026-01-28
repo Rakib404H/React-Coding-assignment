@@ -1,6 +1,6 @@
 # Product Explorer Dashboard
 
-A polished React + TypeScript product explorer built as practice for the JustGo frontend take‑home. It features deep‑linkable search, infinite scrolling, category filtering, currency preferences, and a responsive, table‑driven UI.
+A polished React + TypeScript product explorer built as a practice frontend take‑home. It features deep‑linkable search, infinite scrolling, category filtering, currency preferences, and a responsive, table‑driven UI.
 
 ## Context
 
