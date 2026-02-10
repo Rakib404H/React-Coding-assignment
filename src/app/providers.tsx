@@ -13,12 +13,7 @@ const queryClient = new QueryClient({
 })
 
 export function AppProviders({ children }: { children: ReactNode }) {
-  const envBase = import.meta.env.BASE_URL.replace(/\/$/, '')
-  const inferredBase =
-    typeof window !== 'undefined' && window.location.pathname.startsWith('/jg-coding-task')
-      ? '/jg-coding-task'
-      : ''
-  const base = envBase || inferredBase
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '')
   return (
     <QueryClientProvider client={queryClient}>
       <CurrencyProvider>
